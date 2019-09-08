@@ -1,0 +1,127 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Insert Show Details</ion-title>
+     
+        <ion-buttons end> <button ion-button (click)="signOut()" color="primary"> Sign Out </button> </ion-buttons> 
+    </ion-navbar>
+      <!-- <ion-nav-buttons side="left">
+          <button class="button" ng-click="signOut()">
+            MI
+          </button>
+        </ion-nav-buttons>
+        <ion-toolbar>
+            <ion-title>Subheader</ion-title>
+          </ion-toolbar> -->
+          
+  </ion-header>
+  <ion-content class="login-content" padding>
+    <!-- <ion-row class="logo-row">
+      <ion-col></ion-col>
+      <ion-col width-67>
+        <img src="http://placehold.it/300x200"/>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row> -->
+    <div class="login-box">
+      <form (ngSubmit)="storeData()" #registerForm="ngForm">
+        <ion-row>
+          <ion-col>
+            <ion-list inset>
+              <ion-item class="transparent">
+                  <ion-label>Location</ion-label>
+                  <ion-select name="location" [(ngModel)]="formData.location" required>
+                    <ion-option  *ngFor="let loc of locations" value="{{loc.locationId}}">{{loc.city}}</ion-option>
+                  </ion-select>
+              </ion-item>
+              <ion-item class="transparent">
+                  <ion-label>Theatre</ion-label>
+                  <ion-select name="theatre_id" [(ngModel)]="formData.theatre_id" required>
+                      <ng-container *ngFor="let the of optionsList">
+                      <ion-option *ngIf="the.locationId == formData.location" value="{{the.theatre_id}}">{{the.theatreName}}</ion-option>
+                    </ng-container>
+                    </ion-select>
+              </ion-item>
+              <ion-item class="transparent">
+                  <ion-label>Exhibitor</ion-label>
+                  <ion-select name="exhibitor_id" [(ngModel)]="formData.exhibitor_id" required>
+                    <ng-container *ngFor="let exe of optionsList">
+                      <ion-option *ngIf="exe.theatre_id == formData.theatre_id" value="{{exe.exhibitor_id}}">{{exe.exhibitorName}}</ion-option>
+                    </ng-container>
+                  </ion-select>
+              </ion-item>
+              <ion-item class="transparent">
+                  <ion-label>Movie</ion-label>
+                  <ion-select name="movie_id" [(ngModel)]="formData.movie_id" required>
+                      <ng-container *ngFor="let mov of optionsList">
+                        <ion-option *ngIf="mov.theatre_id == formData.theatre_id" value="{{mov.movie_id}}">{{mov.movieName}}</ion-option>
+                      </ng-container>
+                  </ion-select>
+              </ion-item>
+              <ion-item class="transparent">
+                  <ion-label>Show Name</ion-label>
+                  <ion-select name="show_id" [(ngModel)]="formData.show_id" required>
+                      <ng-container *ngFor="let show of shows">
+                        <ion-option value="{{show.id}}">{{show.name}}</ion-option>
+                      </ng-container>
+                  </ion-select>
+              </ion-item>
+              <ion-item class="transparent" style="margin-left: 5%">
+                <ion-label>Date</ion-label>
+                <ion-input name="date" type="date" required [(ngModel)]="formData.show_date"></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col></ion-col>
+            <ion-col style="text-align: center">Tickets</ion-col>
+            <ion-col style="text-align: center">Price</ion-col>
+            <ion-col style="text-align: center">Price Diff</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="margin-top: 5%">Class 1</ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class1_tickets" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class1_tickets" ></ion-input></ion-item></ion-col>
+            <!-- <ion-col><ion-item class="transparent"><ion-input name="c1Price" type="number" step="0.01" pattern="^\d*(\.\d{0,2})?$" required [(ngModel)]="formData.c1Price" ></ion-input></ion-item></ion-col> -->
+            <ion-col><ion-item class="transparent"><ion-input name="class1_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class1_price" ></ion-input></ion-item></ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class1_actual_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class1_actual_price" ></ion-input></ion-item></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="margin-top: 5%">Class 2</ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class2_tickets" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class2_tickets" ></ion-input></ion-item></ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class2_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class2_price" ></ion-input></ion-item></ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class2_actual_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class2_actual_price" ></ion-input></ion-item></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="margin-top: 5%">Class 3</ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class3_tickets" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class3_tickets" ></ion-input></ion-item></ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class3_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class3_price" ></ion-input></ion-item></ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class3_actual_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class3_actual_price" ></ion-input></ion-item></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="margin-top: 5%">Class 4</ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class4_tickets" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class4_tickets" ></ion-input></ion-item></ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class4_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class4_price" ></ion-input></ion-item></ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class4_actual_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class4_actual_price" ></ion-input></ion-item></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="margin-top: 5%">Class 5</ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class5_tickets" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class5_tickets" ></ion-input></ion-item></ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class5_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class5_price" ></ion-input></ion-item></ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="class5_actual_price" type="number" pattern="[0-9]*" required [(ngModel)]="formData.class5_actual_price" ></ion-input></ion-item></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="margin-top: 5%">Agent Beta</ion-col>
+            <ion-col><ion-item class="transparent"><ion-input name="agent_beta" type="number" pattern="[0-9]*" required [(ngModel)]="formData.agent_beta" ></ion-input></ion-item></ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+        <ion-row padding></ion-row>
+        <ion-row>
+          <ion-col class="signup-col">
+            <!-- <button ion-button class="submit-btn" full type="submit" color="danger">Submit</button> -->
+            <button ion-button class="submit-btn" [disabled]="!registerForm.form.valid" full type="submit" color="danger">Submit</button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </ion-content>

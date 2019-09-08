@@ -1,0 +1,8 @@
+{
+  "name": "shanmukaApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "app_id": ""
+}
